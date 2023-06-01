@@ -1,0 +1,75 @@
+what can Postman do for us?
+using postman we can work with our API Server that we have created by FastAPI. so we can get data from API, send data to API, update data, etc. it's a very useful tool in working and testing our API.
+
+what is a get request?
+when we wanna send a get request to an API which is our FastAPI sever here, it's like saying hey, API, I want you to give me or send me back the data I want.
+
+what is a post requesst?
+it's like saying hey API server here is some data I wanna send it to you. I want you to do whatever it's needed!
+
+what is a pydantic model?
+so basically pydantic is an independent library, and it has nothing to do with fastapi. but we will use it to validate the data that the user sends to the API. a pydantic is a library that we can use in fastapi and a pydantic model is almost like a contract between frontend and backend. using pydantic we can make sure that the frontend will send the data exactly according to the schema that we define in our pydantic model. so in summary a pydantic model is a schema that we define to determine how the data should look like when the frontend send it to API. if it doesn't satisfy our conditions in the schema, we're gonna give the frontend an error to correct the data and send it again.
+
+How can we turn a python folder to a python package?
+we can do it by creating an empty __init__.py in our python folder. this is going to turn our python folder to a python package.
+basically a package is just a fancy name for a folder in python.
+
+
+how can we work with postgres database within a python application?
+for doing this, we are going to need a postgres driver. there are some libraries that can this for us. we use Psycopg library in this project.
+
+how can we work with Psycopg library?
+if you go to the official document page for this library, it gives you the enough information to how setup and connect to a postgres database within your python application.
+
+what is the host or ip address of the database when it is running on our own computer?
+we can set it as 'localhost'. it means our own local machine ip address.
+
+what is an ORM? and what difference does it make for us?
+when it comes to interacting with a database within a specific programming language, there is going to different ways to do that.
+one of them that we used in our python application was through postgres driver. in this method we talked to a database by sending sql
+command. the second method is by using a concept called an ORM. basically an ORM is a layer of abstraction that sits between database
+and our fastapi application. so, in this method we don't talk to database directly. instead we talk to the ORM and then ORM will talk
+to database. the benefit of this method is that we don't have to use sql anymore, and we just need to code in python in order to talk
+to database and those commands themselves are going to be translated to SQL commands.
+
+what is SQLAlchemy?
+one of the most popular python ORMs is SQLAlchemy. we can use it to talk to database without being worried about using SQL commands.
+sqlalchemy has no relationship with fastapi. it is a completely independent library that we can use it in any program even if it's
+not a web application.
+
+
+what can an ORM do?
+Well, by using an ORM we can avoid using pgadmin for creating our tables, entries. even we can avoid using sql commands to send a query
+ to our database! instead, by using sqlalchemy as ORM, we are going to create our tables and its properties as python models(classes)
+ . also instead of sending queries as sql commands to our database, we are gonna use python language to create these queries to send it
+  to our database! so everything is going to be in pure python!(both creating tables, entries and everything related to a table; also
+  sending queries to the database will be done in python language) we are not gonna mess with pgadmin and sql language anymore.
+
+
+how many ways do we have to create a postgres database and interacting with it within our fastapi application?
+there are two ways of doing it that we have learned so far:
+1) going to pgadmin and creating the database, different tables, entries, properties of tables, etc. manually within the pgadmin
+application.  and then connecting to our database within our fastapi application using database driver(psycopg2 for postgres) and
+finally using sql language to send queries to our database withing our fastapi application environment.
+2) using sqlalchemy as an ORM and creating our tables, entries, properties, etc. as python models(classes) within our fastapi
+environment and connecting to it within fastapi. and then also using python commands to send queries to our created postgres database
+within our fastapi environment. in this method we don't need to go to pgadmin and doing anything. everything is going to be done within
+ fastapi environment.
+
+
+do we need to install database drive if we wanna use sqlalchemy instead of using pgadmin and raw sql?
+you have to understand that although we use sqlalchemy within fastapi, but this ORM ( which is sqlalchemy) needs to send whatever we
+want to send to the database! and how does an ORM do that? so it uses corresponding database driver! which here it is postgres driver
+called psycopg2. you have to keep in mind that, the job of sqlalchemy is to abstract away sql language and working with DBMS directly;
+so we can use pure python. but on the other hand, SQlAlchemy uses a database driver to interact with the database to send our
+ queries to it. in summary, sqlalchemy sits in the middle(between us as fastapi application and database), it receives our commands and
+  queries within fastapi which is in pure python language; and then it uses a database driver to translate all of those python commands
+   to sql and finally send it to database.
+
+
+why do we always query the database to retrieve a post id except when we wanna create a new post in database?
+so answer to this question is very easy :). it's because that when we want to get all or just one post, when we wanna delete/update a
+post in our database, we have that entry in our database already! and the only thing we need to do is that we have to query that
+specific entry in the database with the desired id, and then we can retrieve that entry from database or we can send some new data into
+ that entry. but when we wanna create a post, there is no post wuth that id before! so how can we query that id? it's obvious that we
+ can't query in this case.
